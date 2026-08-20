@@ -1,0 +1,32 @@
+.container {
+  width: min(100% - 2.5rem, var(--container-lg));
+  margin-inline: auto;
+}
+
+.sm {
+  max-width: var(--container-sm);
+}
+
+.md {
+  max-width: var(--container-md);
+}
+
+.lg {
+  max-width: var(--container-lg);
+}
+
+.xl {
+  max-width: var(--container-xl);
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: min(100% - 5rem, var(--container-lg));
+  }
+}
+
+@media (min-width: 1100px) {
+  .container {
+    width: min(100% - 8rem, var(--container-lg));
+  }
+}

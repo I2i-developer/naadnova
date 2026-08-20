@@ -1,0 +1,19 @@
+.section {
+  padding-block: var(--space-20);
+}
+
+.surface {
+  background: var(--color-surface);
+  box-shadow: var(--shadow-line);
+}
+
+.dark {
+  background: var(--color-secondary);
+  color: var(--color-secondary-contrast);
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding-block: var(--space-16);
+  }
+}
