@@ -12,8 +12,10 @@ import {
 import { Container } from "@/components/layout/Container";
 import { MotionArticle } from "@/components/motion/MotionCard";
 import { Reveal } from "@/components/motion/Reveal";
+import { AboutGalleryCarousel } from "@/components/sections/AboutGalleryCarousel";
 import { TestimonialCarousel } from "@/components/sections/TestimonialCarousel";
 import { Button } from "@/components/ui/Button";
+import { gallerySlides } from "@/config/gallery";
 import { siteConfig } from "@/config/site";
 
 import styles from "./page.module.css";
@@ -370,6 +372,24 @@ export default function HomePage() {
               </div>
             </div>
           </Reveal>
+        </Container>
+      </section>
+
+      <section className={styles.gallery}>
+        <Container size="xl">
+          <Reveal className={styles.centerHeader}>
+            <p>Gallery</p>
+            <h2>
+              Moments from the <span>NaadNova rhythm</span>
+            </h2>
+            <small>Inside the studio flow where lessons, practice, and expression come alive.</small>
+          </Reveal>
+
+          <div className={styles.galleryGrid}>
+            <Reveal className={styles.galleryFrame} variant="scale">
+              <AboutGalleryCarousel slides={gallerySlides} />
+            </Reveal>
+          </div>
         </Container>
       </section>
 

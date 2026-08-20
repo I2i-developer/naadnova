@@ -271,6 +271,7 @@
 
 .learning,
 .courses,
+.gallery,
 .system,
 .testimonials {
   padding-block: 4rem;
@@ -870,6 +871,42 @@
   display: block;
   margin-top: var(--space-3);
   color: var(--color-muted);
+}
+
+.gallery {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 6% 14%, rgb(130 29 218 / 0.1), transparent 19rem),
+    radial-gradient(circle at 94% 74%, rgb(0 242 255 / 0.09), transparent 21rem),
+    linear-gradient(135deg, #fbf8fc, #f5f8fc 58%, #fff3f9);
+}
+
+.gallery::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background:
+    linear-gradient(90deg, rgb(8 13 42 / 0.04) 1px, transparent 1px),
+    linear-gradient(180deg, rgb(8 13 42 / 0.035) 1px, transparent 1px);
+  background-size: 4.4rem 4.4rem;
+  mask-image: radial-gradient(circle at center, black, transparent 78%);
+}
+
+.gallery > div {
+  position: relative;
+  z-index: 1;
+}
+
+.galleryGrid {
+  max-width: 74rem;
+  margin-top: var(--space-8);
+  margin-inline: auto;
+}
+
+.galleryFrame {
+  width: 100%;
 }
 
 .stepGrid {
@@ -1512,6 +1549,7 @@
   .method,
   .learning,
   .courses,
+  .gallery,
   .system,
   .testimonials {
     padding-block: 3rem;
