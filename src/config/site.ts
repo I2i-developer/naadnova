@@ -18,11 +18,13 @@ import {
   Users
 } from "lucide-react";
 
+import { env } from "@/lib/env";
+
 export const siteConfig = {
   name: "NaadNova",
   tagline: "Come, Learn & Create",
   instructorName: "[Instructor Name]",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  url: env.siteUrl,
   description:
     "Come, Learn & Create with premium music lessons for children, teens, and adults.",
   primaryCta: "Book a Trial Class",
