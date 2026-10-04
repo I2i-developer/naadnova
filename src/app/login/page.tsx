@@ -10,6 +10,9 @@ import { redirect } from "next/navigation";
 
 import styles from "./page.module.css";
 
+// Session redirects depend on the current request, not the build environment.
+export const dynamic = "force-dynamic";
+
 export default async function LoginPage({ searchParams }: { searchParams: Promise<{ error?: string; message?: string }> }) {
   const auth = await getAuthenticatedUser();
   if (auth) redirect(auth.profile?.role === "admin" ? "/admin" : "/dashboard");
