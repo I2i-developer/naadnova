@@ -4,6 +4,7 @@ import { LockKeyhole, Mail, Phone, UserRound } from "lucide-react";
 import { signUp } from "@/app/auth/actions";
 import { AuthSubmitButton } from "@/components/forms/AuthSubmitButton";
 import { getAuthenticatedUser } from "@/lib/auth";
+import { hasPublicSupabaseEnv } from "@/lib/env";
 import { redirect } from "next/navigation";
 
 import styles from "./page.module.css";
@@ -11,10 +12,14 @@ import styles from "./page.module.css";
 export const dynamic = "force-dynamic";
 
 export default async function SignupPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
-  const auth = await getAuthenticatedUser();
+  const authConfigured = hasPublicSupabaseEnv();
+  const auth = authConfigured ? await getAuthenticatedUser() : null;
   if (auth) redirect(auth.profile?.role === "admin" ? "/admin" : "/dashboard");
 
   const { error } = await searchParams;
+  const feedback = !authConfigured || error === "auth_unavailable"
+    ? "Account creation is temporarily unavailable. Please try again later or contact the academy."
+    : error;
   return (
     <section className={styles.signupPage}>
       <div className={styles.signupCard}>
@@ -23,7 +28,7 @@ export default async function SignupPage({ searchParams }: { searchParams: Promi
           <span>Create your NaadNova account and begin your learning flow.</span>
         </div>
 
-        {error ? <p className={styles.error}>{error}</p> : null}
+        {feedback ? <p role="status" className={styles.error}>{feedback}</p> : null}
 
         <form className={styles.form} action={signUp} aria-label="Student signup">
           <div className={styles.fieldGrid}>
@@ -72,7 +77,7 @@ export default async function SignupPage({ searchParams }: { searchParams: Promi
             <span>I agree to the Terms of Service and Privacy Policy.</span>
           </label>
 
-          <AuthSubmitButton className={styles.submitButton} label="Create Your Flow" pendingLabel="Creating account..." />
+          <AuthSubmitButton className={styles.submitButton} label="Create Your Flow" pendingLabel="Creating account..." disabled={!authConfigured} />
         </form>
 
         <p className={styles.loginLine}>

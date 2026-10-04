@@ -6,6 +6,7 @@ import { signIn } from "@/app/auth/actions";
 import { AuthSubmitButton } from "@/components/forms/AuthSubmitButton";
 import { PasswordField } from "@/components/forms/PasswordField";
 import { getAuthenticatedUser } from "@/lib/auth";
+import { hasPublicSupabaseEnv } from "@/lib/env";
 import { redirect } from "next/navigation";
 
 import styles from "./page.module.css";
@@ -14,11 +15,14 @@ import styles from "./page.module.css";
 export const dynamic = "force-dynamic";
 
 export default async function LoginPage({ searchParams }: { searchParams: Promise<{ error?: string; message?: string }> }) {
-  const auth = await getAuthenticatedUser();
+  const authConfigured = hasPublicSupabaseEnv();
+  const auth = authConfigured ? await getAuthenticatedUser() : null;
   if (auth) redirect(auth.profile?.role === "admin" ? "/admin" : "/dashboard");
 
   const params = await searchParams;
-  const feedback = params.error === "idle_timeout"
+  const feedback = !authConfigured || params.error === "auth_unavailable"
+    ? "Sign-in is temporarily unavailable. Please try again later or contact the academy."
+    : params.error === "idle_timeout"
     ? "You were signed out after 30 minutes without activity. Sign in to continue."
     : params.error === "session_expired"
       ? "Your session is no longer active. Please sign in again."
@@ -45,7 +49,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
             <p>Initialize your connection to the resonance.</p>
           </div>
 
-          {feedback ? <p className={params.error ? styles.error : styles.success}>{feedback}</p> : null}
+          {feedback ? <p role="status" className={!authConfigured || params.error ? styles.error : styles.success}>{feedback}</p> : null}
 
           <form className={styles.form} action={signIn} aria-label="Student login">
             <label>
@@ -72,7 +76,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
               <Link href="/contact">Forgot Signal?</Link>
             </div>
 
-            <AuthSubmitButton className={styles.submitButton} label="Establish Connection" pendingLabel="Connecting..." />
+            <AuthSubmitButton className={styles.submitButton} label="Establish Connection" pendingLabel="Connecting..." disabled={!authConfigured} />
           </form>
 
           <p className={styles.signupLine}>

@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 
 import { ACTIVE_SESSION_COOKIE, getAuthenticatedUser, getDeviceLabel } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
+import { hasPublicSupabaseEnv } from "@/lib/env";
 
 function value(formData: FormData, key: string) {
   return String(formData.get(key) ?? "").trim();
@@ -33,6 +34,7 @@ function authErrorMessage(error: { code?: string; message: string }, flow: "logi
 }
 
 export async function signIn(formData: FormData) {
+  if (!hasPublicSupabaseEnv()) redirect("/login?error=auth_unavailable");
   const existingSession = await getAuthenticatedUser();
   if (existingSession) redirect(existingSession.profile?.role === "admin" ? "/admin" : "/dashboard");
 
@@ -74,6 +76,7 @@ export async function signIn(formData: FormData) {
 }
 
 export async function signUp(formData: FormData) {
+  if (!hasPublicSupabaseEnv()) redirect("/signup?error=auth_unavailable");
   const existingSession = await getAuthenticatedUser();
   if (existingSession) redirect(existingSession.profile?.role === "admin" ? "/admin" : "/dashboard");
 

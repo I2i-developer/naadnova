@@ -2,12 +2,13 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 import { ACTIVE_SESSION_COOKIE } from "@/lib/auth";
+import { env } from "@/lib/env";
 
 export async function proxy(request: NextRequest) {
   let response = NextResponse.next({ request });
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  if (!url || !key) return response;
+  const url = env.supabaseUrl;
+  const key = env.supabaseAnonKey;
+  if (!url || !key) return NextResponse.redirect(new URL("/login?error=auth_unavailable", request.url));
 
   const supabase = createServerClient(url, key, {
     cookies: {

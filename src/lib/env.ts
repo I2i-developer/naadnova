@@ -23,8 +23,8 @@ function resolveSiteUrl() {
 
 export const env = {
   siteUrl: resolveSiteUrl(),
-  supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL,
-  supabaseAnonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL?.trim(),
+  supabaseAnonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim() || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY?.trim(),
   supabaseServiceRoleKey: process.env.SUPABASE_SERVICE_ROLE_KEY,
   whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER
 };
