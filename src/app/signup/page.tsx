@@ -1,11 +1,18 @@
 import Link from "next/link";
-import { ArrowRight, AudioLines, LockKeyhole, Mail, Music2, Phone, UserRound } from "lucide-react";
+import { LockKeyhole, Mail, Phone, UserRound } from "lucide-react";
 
-import { featuredCourses } from "@/config/site";
+import { signUp } from "@/app/auth/actions";
+import { AuthSubmitButton } from "@/components/forms/AuthSubmitButton";
+import { getAuthenticatedUser } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 import styles from "./page.module.css";
 
-export default function SignupPage() {
+export default async function SignupPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
+  const auth = await getAuthenticatedUser();
+  if (auth) redirect(auth.profile?.role === "admin" ? "/admin" : "/dashboard");
+
+  const { error } = await searchParams;
   return (
     <section className={styles.signupPage}>
       <div className={styles.signupCard}>
@@ -14,14 +21,16 @@ export default function SignupPage() {
           <span>Create your NaadNova account and begin your learning flow.</span>
         </div>
 
-        <form className={styles.form} action="/signup" aria-label="Student signup">
+        {error ? <p className={styles.error}>{error}</p> : null}
+
+        <form className={styles.form} action={signUp} aria-label="Student signup">
           <div className={styles.fieldGrid}>
             <label>
               <span>
                 <UserRound aria-hidden size={15} />
                 Learner Name
               </span>
-              <input name="name" type="text" placeholder="Your name" autoComplete="name" />
+              <input name="name" type="text" placeholder="Your name" autoComplete="name" required />
             </label>
 
             <label>
@@ -29,7 +38,7 @@ export default function SignupPage() {
                 <Phone aria-hidden size={15} />
                 Contact
               </span>
-              <input name="phone" type="tel" placeholder="Phone number" autoComplete="tel" />
+              <input name="phone" type="tel" placeholder="Phone number" autoComplete="tel" required />
             </label>
           </div>
 
@@ -38,42 +47,8 @@ export default function SignupPage() {
               <Mail aria-hidden size={15} />
               Email
             </span>
-            <input name="email" type="email" placeholder="user@frequency.com" autoComplete="email" />
+            <input name="email" type="email" placeholder="you@example.com" autoComplete="email" required />
           </label>
-
-          <div className={styles.fieldGrid}>
-            <label>
-              <span>
-                <Music2 aria-hidden size={15} />
-                Instrument
-              </span>
-              <select name="instrument" defaultValue="">
-                <option value="" disabled>
-                  Choose instrument
-                </option>
-                {featuredCourses.map((course) => (
-                  <option key={course.slug} value={course.title}>
-                    {course.title}
-                  </option>
-                ))}
-              </select>
-            </label>
-
-            <label>
-              <span>
-                <AudioLines aria-hidden size={15} />
-                Learning Mode
-              </span>
-              <select name="mode" defaultValue="">
-                <option value="" disabled>
-                  Choose mode
-                </option>
-                <option>Online</option>
-                <option>Offline</option>
-                <option>Hybrid</option>
-              </select>
-            </label>
-          </div>
 
           <label>
             <span>
@@ -85,18 +60,17 @@ export default function SignupPage() {
               type="password"
               placeholder="Create password"
               autoComplete="new-password"
+              minLength={8}
+              required
             />
           </label>
 
           <label className={styles.agreement}>
-            <input type="checkbox" name="updates" />
-            <span>Send me course updates and trial class guidance.</span>
+            <input type="checkbox" name="agreement" required />
+            <span>I agree to the Terms of Service and Privacy Policy.</span>
           </label>
 
-          <button className={styles.submitButton} type="submit">
-            <span>Create Your Flow</span>
-            <ArrowRight aria-hidden size={18} />
-          </button>
+          <AuthSubmitButton className={styles.submitButton} label="Create Your Flow" pendingLabel="Creating account..." />
         </form>
 
         <p className={styles.loginLine}>

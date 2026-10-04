@@ -1,0 +1,24 @@
+.viewer { position: fixed; inset: 0; z-index: 10000; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; width: 100%; height: 100dvh; padding: 0.75rem 1.25rem 1rem; background: rgb(0 0 0 / 0.95); color: #fff; }
+.viewer:fullscreen { background: #050505; }
+.toolbar { display: flex; min-height: 3.5rem; align-items: center; justify-content: space-between; gap: 1rem; padding-bottom: 0.5rem; }
+.toolbar > div { display: flex; gap: 0.35rem; }
+.toolbar button { display: grid; width: 2.75rem; height: 2.75rem; place-items: center; border: 0; border-radius: 50%; background: transparent; color: #fff; cursor: pointer; transition: background 160ms ease; }
+.toolbar button:hover { background: rgb(255 255 255 / 0.14); }
+.toolbar button:focus-visible { outline: 2px solid #00ddeb; outline-offset: 2px; }
+.toolbar button:disabled { opacity: 0.3; cursor: default; }
+.counter { color: rgb(255 255 255 / 0.65); font-size: 0.75rem; font-variant-numeric: tabular-nums; }
+.stage { min-width: 0; min-height: 0; overflow: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #666 transparent; }
+.imageSpace { position: relative; min-width: 100%; min-height: 100%; }
+.image { object-fit: contain; user-select: none; }
+.caption { padding-top: 0.75rem; text-align: center; }
+.caption strong { display: block; font-size: 0.95rem; line-height: 1.4; }
+.caption p { max-width: 60rem; margin: 0.25rem auto 0; color: rgb(255 255 255 / 0.65); font-size: 0.75rem; line-height: 1.5; }
+.caption > span { display: block; color: #75ecf3; font-size: 0.72rem; }
+@media (max-width: 640px) {
+  .viewer { padding: max(0.5rem, env(safe-area-inset-top)) 0.5rem max(0.75rem, env(safe-area-inset-bottom)); }
+  .toolbar { min-height: 3.25rem; gap: 0.35rem; }
+  .toolbar > div { gap: 0; }
+  .toolbar button { width: 2.5rem; height: 2.75rem; }
+  .caption strong { font-size: 0.85rem; }
+  .caption p { font-size: 0.7rem; max-height: 4.5rem; overflow-y: auto; }
+}

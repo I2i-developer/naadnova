@@ -1,0 +1,47 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Supabase: Login",
+      "type": "npm",
+      "script": "supabase:login",
+      "problemMatcher": []
+    },
+    {
+      "label": "Supabase: Link project",
+      "type": "npm",
+      "script": "supabase:link",
+      "problemMatcher": []
+    },
+    {
+      "label": "Supabase: Sync migrations now",
+      "type": "npm",
+      "script": "db:sync",
+      "problemMatcher": []
+    },
+    {
+      "label": "Supabase: Watch migrations and sync",
+      "type": "npm",
+      "script": "db:watch",
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Supabase: Pull remote schema",
+      "type": "npm",
+      "script": "db:pull",
+      "problemMatcher": []
+    },
+    {
+      "label": "Supabase: Generate database types",
+      "type": "npm",
+      "script": "db:types",
+      "problemMatcher": []
+    }
+  ]
+}

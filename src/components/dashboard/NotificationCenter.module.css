@@ -1,0 +1,61 @@
+.center { position: relative; z-index: 40; }
+
+.trigger { position: relative; display: grid; width: 2.75rem; height: 2.75rem; cursor: pointer; place-items: center; border: 1px solid var(--dash-button-border); border-radius: 50%; background: color-mix(in srgb, var(--dash-button-surface) 88%, transparent); color: var(--dash-text); box-shadow: inset 0 1px var(--dash-highlight), 0 0.45rem 1.2rem rgb(0 0 0 / 0.1); transition: border-color 180ms ease, color 180ms ease, transform 180ms ease, background 180ms ease; }
+.trigger:hover, .trigger[aria-expanded="true"] { border-color: color-mix(in srgb, var(--dash-accent-strong) 50%, transparent); background: color-mix(in srgb, var(--dash-accent-strong) 10%, var(--dash-button-surface)); color: var(--dash-accent-strong); transform: translateY(-1px); }
+.badge { position: absolute; top: -0.25rem; right: -0.25rem; display: grid; min-width: 1.15rem; height: 1.15rem; place-items: center; border: 2px solid var(--dash-bg); border-radius: 999px; padding-inline: 0.18rem; background: linear-gradient(135deg, #ff315d, #a42ada); color: #fff; font-size: 0.58rem; font-weight: 900; line-height: 1; }
+
+.panel { position: absolute; top: calc(100% + 0.7rem); right: 0; width: min(25rem, calc(100vw - 2rem)); overflow: hidden; border: 1px solid var(--dash-border); border-radius: 0.85rem; background: color-mix(in srgb, var(--dash-bg) 93%, transparent); box-shadow: inset 0 1px var(--dash-highlight), 0 1.5rem 4rem rgb(0 0 0 / 0.3); backdrop-filter: blur(24px); animation: panelEnter 180ms ease both; }
+.panel::before { position: absolute; inset: 0 0 auto; height: 2px; content: ""; background: linear-gradient(90deg, #00ddeb, #821dda, #ff315d); }
+.panelHeader { display: flex; min-height: 4.7rem; align-items: center; justify-content: space-between; gap: 1rem; border-bottom: 1px solid var(--dash-border); padding: 0.9rem 1rem 0.8rem; }
+.panelHeader span { display: block; margin-bottom: 0.18rem; color: var(--dash-accent-strong); font-family: var(--font-mono); font-size: 0.58rem; font-weight: 900; text-transform: uppercase; }
+.panelHeader h2 { margin: 0; font-size: 1.05rem; letter-spacing: 0; }
+.panelHeader button { display: inline-flex; flex: none; cursor: pointer; align-items: center; gap: 0.35rem; border: 0; padding: 0.4rem; background: transparent; color: var(--dash-accent-strong); font-size: 0.67rem; font-weight: 850; }
+.panelHeader button:hover { color: var(--dash-text); }
+
+.list { max-height: min(31rem, calc(100svh - 8rem)); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--dash-border) transparent; }
+.item { position: relative; display: grid; width: 100%; grid-template-columns: 2.25rem minmax(0, 1fr) auto; align-items: start; gap: 0.7rem; border: 0; border-bottom: 1px solid var(--dash-border); padding: 0.9rem 1rem; background: transparent; color: var(--dash-text); text-align: left; transition: background 160ms ease; }
+.item:hover { background: var(--dash-panel); }
+.item[data-unread="true"] { background: color-mix(in srgb, var(--dash-accent-strong) 5%, transparent); }
+.itemIcon { display: grid; width: 2.25rem; height: 2.25rem; place-items: center; border: 1px solid color-mix(in srgb, var(--dash-accent-strong) 24%, transparent); border-radius: 0.6rem; background: color-mix(in srgb, var(--dash-accent-strong) 10%, transparent); color: var(--dash-accent-strong); }
+.itemIcon[data-type="payment"] { border-color: color-mix(in srgb, var(--dash-success) 28%, transparent); background: color-mix(in srgb, var(--dash-success) 10%, transparent); color: var(--dash-success); }
+.itemIcon[data-type="access"] { border-color: color-mix(in srgb, var(--dash-violet) 28%, transparent); background: color-mix(in srgb, var(--dash-violet) 10%, transparent); color: var(--dash-violet); }
+.itemIcon[data-type="new_student"], .itemIcon[data-type="new_enrollment"] { border-color: color-mix(in srgb, var(--dash-warning) 28%, transparent); background: color-mix(in srgb, var(--dash-warning) 10%, transparent); color: var(--dash-warning); }
+.itemCopy { min-width: 0; color: var(--dash-muted); font-size: 0.72rem; line-height: 1.45; }
+.itemTopline { display: flex; align-items: baseline; justify-content: space-between; gap: 0.65rem; margin-bottom: 0.18rem; }
+.itemTopline strong { overflow: hidden; color: var(--dash-text); font-size: 0.78rem; text-overflow: ellipsis; white-space: nowrap; }
+.itemTopline time { flex: none; color: var(--dash-subtle); font-family: var(--font-mono); font-size: 0.57rem; }
+.unreadDot { width: 0.42rem; height: 0.42rem; margin-top: 0.35rem; border-radius: 50%; background: var(--dash-accent-strong); box-shadow: 0 0 0.65rem color-mix(in srgb, var(--dash-accent-strong) 70%, transparent); }
+.state { margin: 0; padding: 2.5rem 1rem; color: var(--dash-muted); font-size: 0.78rem; text-align: center; }
+.empty { display: grid; min-height: 12rem; place-items: center; align-content: center; gap: 0.45rem; padding: 1.5rem; color: var(--dash-subtle); text-align: center; }
+.empty svg { margin-bottom: 0.25rem; color: var(--dash-accent-strong); }
+.empty strong { color: var(--dash-text); font-size: 0.83rem; }
+.empty span { max-width: 15rem; font-size: 0.7rem; line-height: 1.5; }
+
+.toast { position: fixed; top: 1rem; right: 1rem; z-index: 90; display: grid; width: min(22rem, calc(100vw - 2rem)); grid-template-columns: 2.25rem minmax(0, 1fr) auto; align-items: center; gap: 0.7rem; border: 1px solid var(--dash-border); border-radius: 0.75rem; padding: 0.75rem; background: color-mix(in srgb, var(--dash-bg) 94%, transparent); color: var(--dash-text); box-shadow: inset 0 1px var(--dash-highlight), 0 1rem 3rem rgb(0 0 0 / 0.28); backdrop-filter: blur(22px); animation: toastEnter 220ms ease both; }
+.toast > span:nth-child(2) { min-width: 0; }
+.toast strong, .toast small { display: block; }
+.toast strong { margin-bottom: 0.15rem; font-size: 0.76rem; }
+.toast small { overflow: hidden; color: var(--dash-muted); font-size: 0.66rem; line-height: 1.4; text-overflow: ellipsis; white-space: nowrap; }
+.toast button { display: grid; width: 1.8rem; height: 1.8rem; cursor: pointer; place-items: center; border: 0; border-radius: 50%; background: transparent; color: var(--dash-muted); }
+.toast button:hover { background: var(--dash-button-surface); color: var(--dash-text); }
+
+@keyframes panelEnter { from { opacity: 0; transform: translateY(-0.35rem) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes toastEnter { from { opacity: 0; transform: translateX(1rem); } to { opacity: 1; transform: translateX(0); } }
+
+@media (max-width: 860px) {
+  .panel { position: fixed; top: 4.6rem; right: 0.5rem; left: 0.5rem; width: auto; }
+  .toast { top: 4.85rem; right: 0.5rem; }
+}
+
+@media (max-width: 480px) {
+  .trigger { width: 2.55rem; height: 2.55rem; }
+  .panelHeader { min-height: 4.25rem; padding-inline: 0.8rem; }
+  .item { grid-template-columns: 2rem minmax(0, 1fr) auto; gap: 0.6rem; padding: 0.8rem; }
+  .itemIcon { width: 2rem; height: 2rem; }
+  .itemTopline { align-items: flex-start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel, .toast { animation: none; }
+}
+

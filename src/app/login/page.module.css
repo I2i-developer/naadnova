@@ -164,6 +164,23 @@
   margin-top: clamp(1.25rem, 3.1vh, 1.95rem);
 }
 
+.error,
+.success {
+  margin: 1rem 0 0;
+  border: 1px solid rgb(186 26 26 / 0.22);
+  border-radius: 0.65rem;
+  padding: 0.72rem 0.85rem;
+  background: rgb(186 26 26 / 0.07);
+  color: #8f1010;
+  font-size: 0.86rem;
+}
+
+.success {
+  border-color: rgb(45 122 79 / 0.24);
+  background: rgb(45 122 79 / 0.08);
+  color: #1d6840;
+}
+
 .form label {
   display: grid;
   gap: 0.56rem;
@@ -186,7 +203,7 @@
 }
 
 .form input[type="email"],
-.form input[type="password"] {
+.passwordField input {
   width: 100%;
   min-height: 2.9rem;
   border: 0;
@@ -202,14 +219,43 @@
 }
 
 .form input[type="email"]::placeholder,
-.form input[type="password"]::placeholder {
+.passwordField input::placeholder {
   color: rgb(68 71 78 / 0.72);
 }
 
 .form input[type="email"]:focus,
-.form input[type="password"]:focus {
+.passwordField input:focus {
   border-color: rgb(130 29 218 / 0.45);
   box-shadow: 0 0.45rem 0.8rem -0.8rem rgb(130 29 218 / 0.8);
+}
+
+.passwordField {
+  position: relative;
+}
+
+.passwordField input {
+  padding-right: 3rem;
+}
+
+.passwordField button {
+  position: absolute;
+  top: 50%;
+  right: 0.3rem;
+  display: grid;
+  width: 2.35rem;
+  height: 2.35rem;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: rgb(68 71 78 / 0.72);
+  transform: translateY(-58%);
+  transition: color var(--transition), background var(--transition);
+}
+
+.passwordField button:hover {
+  background: rgb(130 29 218 / 0.08);
+  color: var(--color-secondary);
 }
 
 .formLinks {
@@ -314,6 +360,20 @@
   transition: transform var(--transition);
 }
 
+.submitButton:disabled {
+  cursor: wait;
+  opacity: 0.72;
+  transform: none;
+}
+
+.submitButton:disabled :global(.auth-submit-spinner) {
+  animation: auth-spin 0.8s linear infinite;
+}
+
+@keyframes auth-spin {
+  to { transform: rotate(360deg); }
+}
+
 .signupLine {
   margin: clamp(1.05rem, 2.8vh, 1.65rem) 0 0;
   color: var(--color-muted);
@@ -357,6 +417,7 @@
     grid-template-columns: 1fr;
     height: auto;
     min-height: auto;
+    overflow: visible;
   }
 
   .brandStage {
@@ -379,23 +440,78 @@
   }
 
   .brandStage {
-    min-height: 34svh;
+    min-height: 28svh;
   }
 
   .formSide {
-    padding: 2rem 1.25rem 2.4rem;
+    padding: 1.75rem 1.25rem 2.2rem;
   }
 
   .formHeader h1 {
-    font-size: clamp(2.2rem, 12vw, 3rem);
+    font-size: clamp(2rem, 10vw, 2.6rem);
+  }
+
+  .formHeader p {
+    font-size: 0.92rem;
+  }
+
+  .form {
+    gap: 0.9rem;
+    margin-top: 1.25rem;
   }
 
   .formLinks {
     align-items: flex-start;
     flex-direction: column;
+    gap: 0.65rem;
   }
 
   .submitButton {
     width: 100%;
+    min-height: 3.15rem;
+    margin-top: 0.9rem;
+  }
+
+  .logoFrame {
+    width: min(72vw, 15.5rem);
+  }
+}
+
+@media (max-width: 420px) {
+  .brandStage {
+    min-height: 24svh;
+  }
+
+  .formSide {
+    padding-inline: 1rem;
+  }
+
+  .form label > span {
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+  }
+
+  .form input[type="email"],
+  .passwordField input {
+    min-height: 2.65rem;
+    padding-left: 0.9rem;
+  }
+
+  .signupLine {
+    font-size: 0.84rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .formSide {
+    padding-inline: 0.85rem;
+  }
+
+  .formHeader h1 {
+    font-size: 1.85rem;
+  }
+
+  .submitButton {
+    font-size: 0.7rem;
   }
 }

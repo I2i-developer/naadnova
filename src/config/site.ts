@@ -21,14 +21,14 @@ import {
 import { env } from "@/lib/env";
 
 export const siteConfig = {
-  name: "NaadNova",
-  tagline: "Come, Learn & Create",
+  name: "Naadnova Academy",
+  tagline: "come learn & Create.",
   instructorName: "[Instructor Name]",
   url: env.siteUrl,
   description:
-    "Come, Learn & Create with premium music lessons for children, teens, and adults.",
-  primaryCta: "Book a Trial Class",
-  secondaryCta: "Explore Courses",
+    "Premier academy for Guitar, Piano/Keyboard, Vocals, Dance, and Art & Craft with online and offline performance-oriented training.",
+  primaryCta: "Book a Free Trial Class",
+  secondaryCta: "Explore Programs",
   contact: {
     phone: "[Phone Number]",
     email: "[Email Address]",
@@ -40,6 +40,11 @@ export const siteConfig = {
     instagram: "#",
     youtube: "#",
     facebook: "#"
+  },
+  links: {
+    googleForm: "#",
+    whatsapp: "#",
+    googleBusinessProfile: "#"
   }
 } as const;
 

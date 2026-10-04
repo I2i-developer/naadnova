@@ -72,6 +72,12 @@
 }
 
 @media (max-width: 420px) {
+  .card {
+    min-height: auto;
+    gap: var(--space-5);
+    padding: var(--space-5);
+  }
+
   .footer {
     align-items: flex-start;
     flex-direction: column;

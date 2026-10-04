@@ -25,7 +25,8 @@ export const env = {
   siteUrl: resolveSiteUrl(),
   supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL,
   supabaseAnonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-  supabaseServiceRoleKey: process.env.SUPABASE_SERVICE_ROLE_KEY
+  supabaseServiceRoleKey: process.env.SUPABASE_SERVICE_ROLE_KEY,
+  whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER
 };
 
 export function hasPublicSupabaseEnv() {

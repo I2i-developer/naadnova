@@ -13,7 +13,7 @@ export function Footer() {
         <div className={styles.brand}>
           <Link className={styles.logo} href="/">
             <Image
-              src="/logo.PNG"
+              src="/logo-new.PNG"
               alt={siteConfig.name}
               width={320}
               height={172}
@@ -73,6 +73,9 @@ export function Footer() {
           <p>{siteConfig.contact.email}</p>
           <p>{siteConfig.contact.location}</p>
           <p>{siteConfig.contact.hours}</p>
+          <p>
+            <Link href={siteConfig.links.googleBusinessProfile}>Google Business Profile</Link>
+          </p>
         </div>
 
         <div className={styles.join}>
@@ -94,7 +97,6 @@ export function Footer() {
         <span>
           <Link href="/privacy-policy">Privacy Policy</Link>
           <Link href="/terms">Terms of Service</Link>
-          <Link href="/cookie-policy">Cookie Policy</Link>
         </span>
       </div>
     </footer>

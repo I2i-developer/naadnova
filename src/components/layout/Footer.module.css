@@ -53,8 +53,8 @@
 
 .socials a {
   display: grid;
-  width: 2.45rem;
-  height: 2.45rem;
+  width: 2.75rem;
+  height: 2.75rem;
   place-items: center;
   border: 1px solid var(--glass-border);
   border-radius: 50%;
@@ -72,14 +72,14 @@
 
 .socials a:hover {
   transform: translateY(-2px);
-  border-color: rgb(0 242 255 / 0.45);
+  border-color: var(--color-success);
   color: var(--color-cyan);
   box-shadow: 0 0 1.2rem rgb(0 242 255 / 0.15), 0 0.75rem 1.5rem rgb(5 17 36 / 0.08);
 }
 
 .socials img {
-  width: 1.15rem;
-  height: 1.15rem;
+  width: 1.35rem;
+  height: 1.35rem;
   object-fit: contain;
 }
 
@@ -180,6 +180,34 @@
 @media (max-width: 900px) {
   .inner {
     grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-7);
+  }
+}
+
+@media (max-width: 700px) {
+  .inner,
+  .bottom {
+    width: min(100% - 2rem, var(--container-xl));
+  }
+
+  .inner {
+    grid-template-columns: 1fr;
+    padding-block: var(--space-12);
+  }
+
+  .brand p,
+  .footer p,
+  .join p {
+    max-width: none;
+  }
+
+  .join form {
+    max-width: 24rem;
+  }
+
+  .bottom {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
 
@@ -202,14 +230,42 @@
   .bottom {
     grid-template-columns: 1fr;
     flex-direction: column;
+    width: min(100% - 1.5rem, var(--container-xl));
+  }
+
+  .inner {
+    gap: var(--space-6);
+    padding-block: var(--space-10);
+  }
+
+  .logoImage {
+    width: 11rem;
+    height: 3.45rem;
   }
 
   .join form {
     align-items: stretch;
     flex-direction: column;
+    max-width: none;
+  }
+
+  .join button {
+    width: 100%;
   }
 
   .bottom span:last-child {
     gap: var(--space-4);
+  }
+}
+
+@media (max-width: 380px) {
+  .inner,
+  .bottom {
+    width: min(100% - 1rem, var(--container-xl));
+  }
+
+  .bottom span:last-child {
+    display: grid;
+    gap: 0.6rem;
   }
 }

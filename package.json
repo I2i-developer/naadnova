@@ -7,7 +7,17 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "supabase:login": "supabase login",
+    "supabase:link": "supabase link --project-ref vlrpykoddokthdahxton",
+    "db:status": "supabase migration list --linked",
+    "db:new": "supabase migration new",
+    "db:pull": "supabase db pull",
+    "db:push:once": "supabase db push --linked --yes",
+    "db:types": "node scripts/supabase-sync.mjs types",
+    "db:sync": "node scripts/supabase-sync.mjs push",
+    "db:watch": "node scripts/supabase-sync.mjs watch",
+    "admin:create": "node scripts/create-admin.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.4",
@@ -26,6 +36,7 @@
     "@types/react-dom": "^19.1.7",
     "eslint": "^9.33.0",
     "eslint-config-next": "^16.3.1",
+    "supabase": "^2.117.0",
     "typescript": "^5.9.2"
   }
 }

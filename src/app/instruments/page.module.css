@@ -295,19 +295,19 @@
 }
 
 .instrumentCard[data-image="guitar"] .instrumentMedia {
-  background-image: url("https://images.unsplash.com/photo-1516924962500-2b4b3b99ea02?auto=format&fit=crop&w=900&q=80");
+  background-image: url("/gallery/Taught through tablature and staff notations.jpeg");
 }
 
 .instrumentCard[data-image="piano"] .instrumentMedia {
-  background-image: url("https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?auto=format&fit=crop&w=900&q=80");
+  background-image: url("/gallery/Focus on one-on-one for better results.jpeg");
 }
 
 .instrumentCard[data-image="keyboard"] .instrumentMedia {
-  background-image: url("https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=900&q=80");
+  background-image: url("/gallery/Teach them studio arrangements.jpeg");
 }
 
 .instrumentCard[data-image="vocals"] .instrumentMedia {
-  background-image: url("https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=900&q=80");
+  background-image: url("/gallery/Done various live stage performances.jpeg");
   background-position: center 35%;
 }
 
@@ -639,7 +639,9 @@
 
 @media (max-width: 640px) {
   .hero {
-    padding-block: 1.5rem;
+    min-height: auto;
+    padding-block: 2rem 2.6rem;
+    overflow-x: clip;
   }
 
   .hero h1 {
@@ -664,6 +666,7 @@
 
   .heroActions a {
     flex: 1 1 100%;
+    width: 100%;
   }
 
   .heroPanel {
@@ -671,7 +674,7 @@
   }
 
   .visualizerShell {
-    padding: 0.8rem;
+    padding: 0.4rem 0;
   }
 
   .livePill {
@@ -700,6 +703,12 @@
     gap: var(--space-4);
   }
 
+  .instruments,
+  .learningPath,
+  .cta {
+    overflow-x: clip;
+  }
+
   .instrumentFeatured,
   .instrumentWide {
     grid-column: auto;
@@ -707,11 +716,12 @@
   }
 
   .instrumentCard {
-    min-height: 20rem;
+    min-height: 17rem;
+    border-radius: 1rem;
   }
 
   .instrumentFeatured {
-    min-height: 24rem;
+    min-height: 19rem;
   }
 
   .instrumentWide .instrumentOverlay {
@@ -731,6 +741,77 @@
   .instrumentMeta {
     width: 100%;
     justify-content: space-between;
+  }
+}
+
+@media (max-width: 480px) {
+  .instruments,
+  .learningPath,
+  .cta {
+    padding-block: 2.75rem;
+  }
+
+  .sectionHeader {
+    text-align: left;
+  }
+
+  .instrumentGrid {
+    margin-top: var(--space-6);
+  }
+
+  .instrumentIcon {
+    width: 2.55rem;
+    height: 2.55rem;
+  }
+
+  .instrumentBody h3,
+  .instrumentFeatured .instrumentBody h3 {
+    font-size: clamp(1.45rem, 8vw, 2rem);
+  }
+
+  .instrumentBody span {
+    font-size: 0.84rem;
+  }
+
+  .instrumentMeta {
+    gap: 0.75rem;
+    padding: 0.7rem;
+    flex-wrap: wrap;
+  }
+
+  .instrumentMeta div + div {
+    padding-left: 0.75rem;
+  }
+
+  .modeCard {
+    grid-template-columns: 1fr;
+  }
+
+  .ctaInner {
+    padding: 1rem;
+  }
+
+  .ctaInner a {
+    width: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero h1 {
+    font-size: clamp(2.25rem, 11vw, 2.9rem);
+  }
+
+  .visualizerShell h2 {
+    font-size: 1.8rem;
+  }
+
+  .waveform {
+    height: 4.8rem;
+  }
+
+  .instrumentCard,
+  .instrumentFeatured {
+    min-height: 15.5rem;
   }
 }
 

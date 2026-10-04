@@ -751,13 +751,16 @@
   border: 1px solid rgb(255 255 255 / 0.62);
   border-radius: 1.15rem;
   background:
+    radial-gradient(ellipse at 50% 100%, rgb(255 255 255 / 0.42), transparent 22rem),
     radial-gradient(circle at 24% 18%, rgb(0 242 255 / 0.12), transparent 14rem),
+    linear-gradient(180deg, rgb(5 17 36 / 0.9), rgb(122 127 135 / 0.44) 52%, rgb(255 255 255 / 0.68)),
     var(--glass-bg-strong);
   box-shadow:
     0 1.5rem 3.5rem rgb(42 24 68 / 0.15),
     inset 0 1px 0 rgb(255 255 255 / 0.52);
   perspective: 1000px;
   backdrop-filter: blur(18px) saturate(1.12);
+  touch-action: pan-y;
 }
 
 .galleryCarousel::before {
@@ -773,37 +776,97 @@
   mask-image: radial-gradient(circle at center, black, transparent 82%);
 }
 
+.galleryViewport {
+  position: absolute;
+  inset: 1rem 4.4rem 3.6rem;
+  z-index: 2;
+  overflow: visible;
+  border-radius: 0.95rem;
+  perspective: 1200px;
+}
+
 .gallerySlide {
   position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(46rem, 58vw);
+  height: clamp(15rem, 29vw, 23rem);
   margin: 0;
   overflow: hidden;
-  border: 1px solid rgb(255 255 255 / 0.28);
-  border-radius: 0.95rem;
-  background: var(--color-deep-ocean);
+  border: clamp(0.42rem, 0.9vw, 0.72rem) solid rgb(255 255 255 / 0.94);
+  border-radius: 0.12rem;
+  background:
+    linear-gradient(145deg, rgb(255 255 255 / 0.15), rgb(255 255 255 / 0.04)),
+    var(--color-deep-ocean);
   box-shadow:
-    0 1.4rem 3rem rgb(0 0 0 / 0.22),
-    inset 0 1px 0 rgb(255 255 255 / 0.16);
+    0 1.35rem 2.3rem rgb(0 0 0 / 0.28),
+    inset 0 1px 0 rgb(255 255 255 / 0.26);
+  cursor: zoom-in;
   transform-origin: center;
+  transition:
+    opacity 0.62s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.62s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.62s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .gallerySlide[data-position="active"] {
-  inset: 0.9rem auto 0.9rem 0.9rem;
+  z-index: 6;
+  opacity: 1;
+  filter: saturate(1) brightness(1);
+  transform: translate(-50%, -52%) scale(1);
+}
+
+.gallerySlide[data-position="previous"] {
   z-index: 4;
-  width: calc(61% - 0.9rem);
+  opacity: 0.92;
+  filter: saturate(0.88) brightness(0.86);
+  transform: translate(-82%, -48%) scale(0.84) rotateY(8deg);
 }
 
 .gallerySlide[data-position="next"] {
-  inset: 0.9rem 0.9rem auto auto;
-  z-index: 3;
-  width: calc(39% - 1.25rem);
-  height: calc(50% - 1.35rem);
+  z-index: 4;
+  opacity: 0.92;
+  filter: saturate(0.88) brightness(0.86);
+  transform: translate(-18%, -48%) scale(0.84) rotateY(-8deg);
 }
 
-.gallerySlide[data-position="last"] {
-  inset: auto 0.9rem 0.9rem auto;
+.gallerySlide[data-position="far-previous"] {
   z-index: 2;
-  width: calc(39% - 1.25rem);
-  height: calc(50% - 1.35rem);
+  opacity: 0.78;
+  filter: saturate(0.78) brightness(0.74);
+  transform: translate(-111%, -45%) scale(0.7) rotateY(13deg);
+}
+
+.gallerySlide[data-position="far-next"] {
+  z-index: 2;
+  opacity: 0.78;
+  filter: saturate(0.78) brightness(0.74);
+  transform: translate(11%, -45%) scale(0.7) rotateY(-13deg);
+}
+
+.gallerySlide[data-position="hidden"] {
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.62);
+}
+
+.gallerySlide:hover,
+.gallerySlide:focus-visible {
+  border-color: rgb(0 242 255 / 0.48);
+  box-shadow:
+    0 1.4rem 3rem rgb(0 0 0 / 0.22),
+    0 0 1.6rem rgb(0 242 255 / 0.16),
+    inset 0 1px 0 rgb(255 255 255 / 0.16);
+}
+
+.gallerySlide[data-position="active"]:hover img {
+  filter: saturate(1.04) contrast(1.08);
+}
+
+.gallerySlide:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: -6px;
 }
 
 .gallerySlide::before {
@@ -812,8 +875,8 @@
   z-index: 1;
   content: "";
   background:
-    radial-gradient(circle at 28% 16%, rgb(0 242 255 / 0.18), transparent 13rem),
-    linear-gradient(180deg, transparent 0 46%, rgb(5 17 36 / 0.88));
+    radial-gradient(circle at 28% 16%, rgb(0 242 255 / 0.12), transparent 13rem),
+    linear-gradient(180deg, transparent 0 52%, rgb(5 17 36 / 0.82));
 }
 
 .gallerySlide img {
@@ -830,6 +893,16 @@
   display: grid;
   gap: 0.35rem;
   color: #fff;
+  opacity: 0;
+  transform: translateY(0.6rem);
+  transition:
+    opacity var(--transition),
+    transform var(--transition);
+}
+
+.gallerySlide[data-position="active"] figcaption {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .gallerySlide svg {
@@ -848,37 +921,48 @@
   font-size: 0.9rem;
 }
 
-.gallerySlide[data-position="next"] figcaption,
-.gallerySlide[data-position="last"] figcaption {
-  gap: 0.24rem;
+.galleryControls {
+  position: absolute;
+  inset: 0.9rem 1.1rem 3.5rem;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  pointer-events: none;
 }
 
-.gallerySlide[data-position="next"] svg,
-.gallerySlide[data-position="last"] svg {
-  width: 1rem;
-  height: 1rem;
+.galleryControls button {
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 0.22);
+  border-radius: 50%;
+  background: rgb(5 17 36 / 0.38);
+  color: white;
+  box-shadow: 0 0.75rem 1.4rem rgb(0 0 0 / 0.18);
+  backdrop-filter: blur(14px) saturate(1.08);
+  pointer-events: auto;
+  transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    transform var(--transition);
 }
 
-.gallerySlide[data-position="next"] strong,
-.gallerySlide[data-position="last"] strong {
-  font-size: 1.04rem;
-}
-
-.gallerySlide[data-position="next"] span,
-.gallerySlide[data-position="last"] span {
-  display: -webkit-box;
-  overflow: hidden;
-  font-size: 0.76rem;
-  line-height: 1.35;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+.galleryControls button:hover {
+  border-color: rgb(0 242 255 / 0.5);
+  background: rgb(255 255 255 / 0.14);
+  color: var(--color-cyan);
+  transform: translateY(-2px);
 }
 
 .galleryDots {
   position: absolute;
-  right: 1.6rem;
-  top: 1.6rem;
-  z-index: 5;
+  left: 50%;
+  bottom: 0.86rem;
+  z-index: 8;
   display: flex;
   gap: 0.42rem;
   border: 1px solid rgb(255 255 255 / 0.16);
@@ -886,21 +970,194 @@
   padding: 0.42rem 0.5rem;
   background: rgb(5 17 36 / 0.34);
   backdrop-filter: blur(14px);
+  transform: translateX(-50%);
 }
 
-.galleryDots span {
+.galleryDots button {
   width: 0.48rem;
   height: 0.48rem;
+  border: 0;
   border-radius: 999px;
+  padding: 0;
   background: rgb(255 255 255 / 0.5);
   transition:
     width var(--transition),
     background var(--transition);
 }
 
-.galleryDots span[data-active="true"] {
+.galleryDots button[data-active="true"] {
   width: 1.45rem;
   background: linear-gradient(90deg, var(--color-cyan), var(--color-electric-violet));
+}
+
+.galleryViewer {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  padding: clamp(1rem, 3vw, 2rem);
+  background:
+    radial-gradient(circle at 22% 16%, rgb(0 242 255 / 0.16), transparent 22rem),
+    radial-gradient(circle at 82% 68%, rgb(255 30 77 / 0.14), transparent 24rem),
+    rgb(5 17 36 / 0.88);
+  backdrop-filter: blur(18px) saturate(1.08);
+}
+
+.galleryViewerPanel {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(18rem, 0.72fr);
+  gap: clamp(0.8rem, 1.6vw, 1.15rem);
+  width: min(100%, 78rem);
+  height: min(86svh, 48rem);
+  max-height: calc(100svh - clamp(2rem, 6vw, 4rem));
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 0.2);
+  border-radius: 1.4rem;
+  background:
+    linear-gradient(145deg, rgb(255 255 255 / 0.1), rgb(255 255 255 / 0.04)),
+    var(--color-deep-ocean);
+  box-shadow:
+    0 2.2rem 5rem rgb(0 0 0 / 0.38),
+    inset 0 1px 0 rgb(255 255 255 / 0.16);
+}
+
+.galleryViewerBackdropImage {
+  z-index: 0;
+  object-fit: cover;
+  opacity: 0.42;
+  filter: blur(18px) saturate(0.9) brightness(0.82);
+  transform: scale(1.08);
+}
+
+.galleryViewerPanel::before {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  content: "";
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgb(255 255 255 / 0.04) 1px, transparent 1px),
+    linear-gradient(180deg, rgb(255 255 255 / 0.035) 1px, transparent 1px);
+  background-size: 3.5rem 3.5rem;
+  mask-image: radial-gradient(circle at center, black, transparent 82%);
+}
+
+.galleryViewerClose {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 4;
+  display: inline-grid;
+  width: 2.8rem;
+  height: 2.8rem;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 0.18);
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.1);
+  color: white;
+  cursor: pointer;
+  transition:
+    transform var(--transition),
+    border-color var(--transition),
+    background var(--transition);
+  backdrop-filter: blur(14px);
+}
+
+.galleryViewerClose:hover {
+  border-color: rgb(255 30 77 / 0.58);
+  background: rgb(255 30 77 / 0.16);
+  transform: rotate(90deg);
+}
+
+.galleryViewerMedia {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  min-height: 0;
+  place-items: center;
+  margin: clamp(0.85rem, 1.6vw, 1.15rem) 0 clamp(0.85rem, 1.6vw, 1.15rem)
+    clamp(0.85rem, 1.6vw, 1.15rem);
+  overflow: hidden;
+  padding: clamp(0.65rem, 1.3vw, 0.95rem);
+  border: 1px solid rgb(255 255 255 / 0.2);
+  border-radius: 1rem;
+  background:
+    linear-gradient(145deg, rgb(255 255 255 / 0.08), rgb(255 255 255 / 0.025)),
+    rgb(5 17 36 / 0.28);
+  box-shadow:
+    0 1.4rem 3rem rgb(0 0 0 / 0.24),
+    inset 0 1px 0 rgb(255 255 255 / 0.12);
+}
+
+.galleryViewerMedia::after {
+  display: none;
+}
+
+.galleryViewerImage {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border: 1px solid rgb(255 255 255 / 0.24);
+  border-radius: 0.18rem;
+  object-fit: contain;
+  filter: none;
+  box-shadow:
+    0 1.7rem 3.5rem rgb(0 0 0 / 0.36),
+    0 0 2rem rgb(0 242 255 / 0.1);
+}
+
+.galleryViewerCaption {
+  position: relative;
+  z-index: 3;
+  align-self: stretch;
+  display: grid;
+  align-content: center;
+  gap: 0.7rem;
+  margin: clamp(0.85rem, 1.6vw, 1.15rem) clamp(0.85rem, 1.6vw, 1.15rem)
+    clamp(0.85rem, 1.6vw, 1.15rem) 0;
+  border: 1px solid rgb(255 255 255 / 0.16);
+  border-radius: 1rem;
+  padding: clamp(1.2rem, 2.6vw, 2rem);
+  background:
+    radial-gradient(circle at 18% 20%, rgb(0 242 255 / 0.12), transparent 9rem),
+    linear-gradient(145deg, rgb(5 17 36 / 0.78), rgb(5 17 36 / 0.5)),
+    rgb(255 255 255 / 0.06);
+  color: white;
+  box-shadow:
+    0 1rem 2rem rgb(0 0 0 / 0.24),
+    inset 0 1px 0 rgb(255 255 255 / 0.14);
+  backdrop-filter: blur(18px) saturate(1.1);
+}
+
+.galleryViewerCaption span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+  color: var(--color-cyan);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.galleryViewerCaption strong {
+  font-family: var(--font-display);
+  font-size: clamp(1.45rem, 3vw, 2.35rem);
+  line-height: 1;
+}
+
+.galleryViewerCaption p {
+  max-width: 52rem;
+  margin: 0;
+  color: rgb(255 255 255 / 0.72);
+  font-size: clamp(0.95rem, 1.4vw, 1.08rem);
+  line-height: 1.58;
 }
 
 .cta {
@@ -1026,8 +1283,9 @@
 
 @media (max-width: 780px) {
   .hero {
+    min-height: auto;
     align-items: start;
-    padding-block: 1.75rem;
+    padding-block: 2rem 2.6rem;
   }
 
   .hero h1,
@@ -1071,28 +1329,103 @@
     min-height: 24rem;
   }
 
-  .gallerySlide[data-position="active"] {
-    inset: 0.75rem 0.75rem auto;
-    width: auto;
-    height: calc(62% - 1rem);
+  .galleryViewport {
+    inset: 1rem 2.4rem 3.4rem;
+  }
+
+  .gallerySlide {
+    width: min(34rem, 70vw);
+    height: clamp(14rem, 45vw, 20rem);
+  }
+
+  .gallerySlide[data-position="previous"] {
+    transform: translate(-84%, -48%) scale(0.78) rotateY(8deg);
   }
 
   .gallerySlide[data-position="next"] {
-    inset: auto auto 0.75rem 0.75rem;
-    width: calc(50% - 1rem);
-    height: calc(38% - 1rem);
+    transform: translate(-16%, -48%) scale(0.78) rotateY(-8deg);
   }
 
-  .gallerySlide[data-position="last"] {
-    inset: auto 0.75rem 0.75rem auto;
-    width: calc(50% - 1rem);
-    height: calc(38% - 1rem);
+  .gallerySlide[data-position="far-previous"] {
+    transform: translate(-106%, -45%) scale(0.62) rotateY(13deg);
+  }
+
+  .gallerySlide[data-position="far-next"] {
+    transform: translate(6%, -45%) scale(0.62) rotateY(-13deg);
   }
 
   .gallerySlide figcaption {
-    right: 0.75rem;
-    bottom: 0.75rem;
-    left: 0.75rem;
+    right: 0.85rem;
+    bottom: 0.85rem;
+    left: 0.85rem;
+  }
+
+  .gallerySlide strong {
+    font-size: clamp(1.28rem, 4.8vw, 1.58rem);
+  }
+
+  .gallerySlide span {
+    display: -webkit-box;
+    overflow: hidden;
+    font-size: 0.82rem;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .galleryControls {
+    inset: 1rem 0.85rem 3.35rem;
+  }
+
+  .galleryControls button {
+    width: 2.45rem;
+    height: 2.45rem;
+  }
+
+  .galleryDots {
+    top: auto;
+    bottom: 0.82rem;
+    max-width: calc(100% - 1.5rem);
+    overflow: hidden;
+  }
+
+  .galleryViewer {
+    padding: 0.75rem;
+  }
+
+  .galleryViewerPanel {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    height: auto;
+    max-height: calc(100svh - 1.5rem);
+    overflow-y: auto;
+    border-radius: 1rem;
+  }
+
+  .galleryViewerMedia {
+    min-height: 58svh;
+    height: 58svh;
+    margin: 0.75rem 0.75rem 0;
+  }
+
+  .galleryViewerImage {
+    inset: 0 !important;
+    border-radius: 0.16rem;
+  }
+
+  .galleryViewerCaption {
+    max-width: none;
+    margin: 0.75rem;
+    padding: 0.95rem 1rem 1.05rem;
+    background:
+      linear-gradient(145deg, rgb(5 17 36 / 0.82), rgb(5 17 36 / 0.62)),
+      rgb(255 255 255 / 0.08);
+  }
+
+  .galleryViewerCaption p {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
   }
 
   .visualOverlay {
@@ -1118,7 +1451,141 @@
 }
 
 @media (max-width: 560px) {
+  .pillars,
+  .instructor,
+  .gallery,
+  .story,
+  .cta {
+    padding-block: 2.75rem;
+  }
+
+  .centerHeader,
+  .galleryHeader {
+    text-align: left;
+  }
+
+  .heroVisual {
+    min-height: 18rem;
+  }
+
+  .visualOverlay {
+    right: 0.75rem;
+    bottom: 0.75rem;
+    left: 0.75rem;
+  }
+
+  .pillarCard,
+  .storyBeat,
+  .instructorStep {
+    grid-template-columns: 1fr;
+  }
+
+  .storyPath::before,
+  .instructorPath::before {
+    display: none;
+  }
+
+  .instructorVisual {
+    min-height: 23rem;
+  }
+
   .instructorNotes {
     display: none;
+  }
+
+  .mentorWave {
+    height: 3.5rem;
+  }
+
+  .galleryCarousel {
+    min-height: 25rem;
+    border-radius: 1rem;
+  }
+
+  .galleryViewport {
+    inset: 0.65rem 0.9rem 3.6rem;
+    border-radius: 0.8rem;
+  }
+
+  .gallerySlide {
+    width: min(20rem, 76vw);
+    height: clamp(15rem, 70vw, 19rem);
+  }
+
+  .gallerySlide[data-position="active"] {
+    transform: translate(-50%, -53%) scale(1);
+  }
+
+  .gallerySlide[data-position="previous"] {
+    transform: translate(-82%, -48%) scale(0.72) rotateY(7deg);
+  }
+
+  .gallerySlide[data-position="next"] {
+    transform: translate(-18%, -48%) scale(0.72) rotateY(-7deg);
+  }
+
+  .gallerySlide[data-position="far-previous"],
+  .gallerySlide[data-position="far-next"] {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .gallerySlide figcaption {
+    right: 0.75rem;
+    bottom: 0.75rem;
+    left: 0.75rem;
+    padding-right: 0.2rem;
+  }
+
+  .gallerySlide strong {
+    font-size: 1.2rem;
+  }
+
+  .gallerySlide span {
+    display: -webkit-box;
+    overflow: hidden;
+    font-size: 0.78rem;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .galleryControls {
+    inset: 0.7rem 0.45rem 3.6rem;
+  }
+
+  .galleryControls button {
+    width: 2.3rem;
+    height: 2.3rem;
+  }
+
+  .galleryDots {
+    top: auto;
+    bottom: 0.82rem;
+    left: 50%;
+    max-width: calc(100% - 1.2rem);
+    transform: translateX(-50%);
+  }
+
+  .galleryViewerPanel {
+    width: min(100%, 28rem);
+  }
+
+  .galleryViewerMedia {
+    min-height: 54svh;
+    height: 54svh;
+    margin: 0.65rem 0.65rem 0;
+  }
+
+  .galleryViewerImage {
+    inset: 0 !important;
+  }
+
+  .galleryViewerCaption {
+    margin: 0.65rem;
+    font-size: 0.9rem;
+  }
+
+  .ctaInner {
+    padding: 1.25rem;
   }
 }

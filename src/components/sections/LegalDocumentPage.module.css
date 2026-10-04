@@ -1,0 +1,403 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(4rem, 2vw, 6.4rem);
+  background:
+    radial-gradient(circle at 10% 18%, rgb(0 242 255 / 0.12), transparent 20rem),
+    radial-gradient(circle at 88% 58%, rgb(255 30 77 / 0.11), transparent 24rem),
+    linear-gradient(135deg, #fbf8fc, #f5f8fc 56%, #fff2f9);
+}
+
+.hero::before,
+.document::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background:
+    linear-gradient(90deg, rgb(8 13 42 / 0.04) 1px, transparent 1px),
+    linear-gradient(180deg, rgb(8 13 42 / 0.035) 1px, transparent 1px);
+  background-size: 4.4rem 4.4rem;
+  mask-image: radial-gradient(circle at center, black, transparent 78%);
+}
+
+.heroGrid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(22rem, 0.92fr) minmax(20rem, 0.58fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: center;
+}
+
+.eyebrow {
+  margin: 0 0 var(--space-3);
+  color: var(--color-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  max-width: 48rem;
+  margin: 0;
+  color: var(--color-primary);
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 5.35rem);
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 0.92;
+}
+
+.heroCopy > p:not(.eyebrow) {
+  max-width: 43rem;
+  margin: var(--space-5) 0 0;
+  color: var(--color-muted);
+  font-size: 1rem;
+  line-height: 1.58;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+}
+
+.summary {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 0.62);
+  border-radius: 1.25rem;
+  padding: clamp(1.2rem, 3vw, 1.7rem);
+  background:
+    linear-gradient(145deg, rgb(255 255 255 / 0.76), rgb(255 255 255 / 0.42)),
+    radial-gradient(circle at 96% 10%, rgb(130 29 218 / 0.12), transparent 10rem),
+    var(--glass-bg-strong);
+  box-shadow:
+    0 1.4rem 3.1rem rgb(42 24 68 / 0.14),
+    inset 0 1px 0 rgb(255 255 255 / 0.56);
+  backdrop-filter: blur(18px) saturate(1.12);
+}
+
+.summary::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  content: "";
+  background: linear-gradient(180deg, var(--color-cyan), var(--color-electric-violet), var(--color-nova-red));
+}
+
+.summary > span,
+.index span,
+.content article > span {
+  color: var(--color-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 850;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.summary strong {
+  display: block;
+  margin-top: var(--space-2);
+  color: var(--color-primary);
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  line-height: 1.05;
+}
+
+.summary div {
+  display: grid;
+  gap: 0.8rem;
+  margin-top: var(--space-6);
+}
+
+.summary p {
+  margin: 0;
+  border: 1px solid rgb(255 255 255 / 0.58);
+  border-radius: 0.9rem;
+  padding: 0.85rem;
+  background: rgb(255 255 255 / 0.46);
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.document {
+  position: relative;
+  overflow: visible;
+  padding-block: clamp(3.5rem, 7vw, 5rem);
+  background:
+    radial-gradient(circle at 92% 20%, rgb(0 242 255 / 0.08), transparent 19rem),
+    #f7f5fa;
+}
+
+.documentGrid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(15.5rem, 0.34fr) minmax(0, 1fr);
+  gap: clamp(1.25rem, 3vw, 2.2rem);
+  align-items: start;
+}
+
+.index {
+  position: sticky;
+  top: 5rem;
+  display: grid;
+  align-self: start;
+  gap: 0.5rem;
+  border: 1px solid var(--glass-border);
+  border-radius: 1rem;
+  padding: 1.05rem;
+  background:
+    linear-gradient(145deg, rgb(255 255 255 / 0.76), rgb(255 255 255 / 0.44)),
+    radial-gradient(circle at 100% 0%, rgb(130 29 218 / 0.1), transparent 9rem),
+    var(--glass-bg-strong);
+  box-shadow:
+    0 1rem 2.2rem rgb(42 24 68 / 0.1),
+    inset 0 1px 0 rgb(255 255 255 / 0.56);
+  backdrop-filter: blur(18px) saturate(1.12);
+}
+
+.index::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  content: "";
+  background: linear-gradient(180deg, var(--color-cyan), var(--color-electric-violet), var(--color-nova-red));
+}
+
+.index span {
+  margin-bottom: 0.35rem;
+  padding-left: 0.2rem;
+}
+
+.index a {
+  position: relative;
+  display: block;
+  border-radius: 0.72rem;
+  padding: 0.68rem 0.74rem 0.68rem 0.88rem;
+  color: var(--color-muted);
+  font-size: 0.86rem;
+  font-weight: 700;
+  line-height: 1.25;
+  transition:
+    background var(--transition),
+    color var(--transition),
+    box-shadow var(--transition),
+    transform var(--transition);
+}
+
+.index a::before {
+  position: absolute;
+  top: 0.82rem;
+  left: 0.34rem;
+  width: 0.26rem;
+  height: 0.26rem;
+  border-radius: 50%;
+  content: "";
+  background: rgb(130 29 218 / 0.45);
+  transition:
+    background var(--transition),
+    box-shadow var(--transition);
+}
+
+.index a:hover {
+  background: rgb(255 255 255 / 0.56);
+  color: var(--color-secondary);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.54);
+  transform: translateX(0.18rem);
+}
+
+.index a:hover::before {
+  background: var(--color-cyan);
+  box-shadow: 0 0 0.9rem rgb(0 242 255 / 0.45);
+}
+
+.content {
+  display: grid;
+  gap: var(--space-4);
+  align-self: start;
+  min-width: 0;
+  scroll-behavior: smooth;
+}
+
+.content article,
+.notice {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  border-radius: 1rem;
+  padding: clamp(1.1rem, 3vw, 1.45rem);
+  background:
+    linear-gradient(145deg, rgb(255 255 255 / 0.76), rgb(255 255 255 / 0.44)),
+    var(--glass-bg-strong);
+  box-shadow:
+    0 1rem 2.2rem rgb(42 24 68 / 0.1),
+    inset 0 1px 0 rgb(255 255 255 / 0.56);
+  backdrop-filter: blur(18px) saturate(1.12);
+}
+
+.content article::before {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  content: "";
+  background: linear-gradient(90deg, var(--color-cyan), var(--color-electric-violet), var(--color-nova-red));
+}
+
+.content h2 {
+  margin: 0.35rem 0 var(--space-3);
+  color: var(--color-primary);
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.4vw, 1.65rem);
+  font-weight: 850;
+  letter-spacing: 0;
+  line-height: 1.08;
+}
+
+.content p,
+.notice p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.94rem;
+  line-height: 1.62;
+}
+
+.content p + p {
+  margin-top: var(--space-3);
+}
+
+.notice {
+  border-color: rgb(130 29 218 / 0.22);
+  background:
+    radial-gradient(circle at 96% 10%, rgb(0 242 255 / 0.1), transparent 9rem),
+    var(--glass-bg-strong);
+}
+
+.notice strong {
+  display: block;
+  margin-bottom: var(--space-2);
+  color: var(--color-primary);
+  font-size: 1rem;
+}
+
+@media (max-width: 900px) {
+  .heroGrid,
+  .documentGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .index {
+    position: sticky;
+    top: 4.35rem;
+    z-index: 3;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    max-height: none;
+    padding: 0.8rem;
+  }
+
+  .index::before {
+    inset: 0 0 auto;
+    width: auto;
+    height: 3px;
+  }
+
+  .index span {
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 0.68rem 0.5rem 0.68rem 0;
+  }
+
+  .index a {
+    flex: 1 1 12rem;
+  }
+
+  .index a:hover {
+    transform: translateY(-0.08rem);
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding-block: 2.75rem;
+  }
+
+  .hero h1 {
+    font-size: var(--type-section-heading-mobile);
+  }
+
+  .actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .actions a {
+    width: 100%;
+  }
+
+  .document {
+    padding-block: 2.5rem;
+  }
+
+  .index {
+    top: 4.1rem;
+    flex-wrap: nowrap;
+    gap: 0.45rem;
+    margin-inline: -0.05rem;
+    border-radius: 0.9rem;
+    padding: 0.65rem;
+    max-height: none;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: none;
+  }
+
+  .index::-webkit-scrollbar {
+    display: none;
+  }
+
+  .index span {
+    display: none;
+  }
+
+  .index a {
+    flex: 0 0 auto;
+    padding: 0.55rem 0.65rem 0.55rem 0.8rem;
+    font-size: 0.78rem;
+  }
+
+  .content article,
+  .notice,
+  .summary {
+    border-radius: 0.95rem;
+  }
+
+  .content p,
+  .notice p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero h1 {
+    font-size: clamp(1.95rem, 10vw, 2.45rem);
+  }
+
+  .index a {
+    flex-basis: auto;
+  }
+
+  .content article,
+  .notice,
+  .summary {
+    padding: 0.95rem;
+  }
+}

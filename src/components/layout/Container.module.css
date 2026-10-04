@@ -25,6 +25,12 @@
   }
 }
 
+@media (max-width: 480px) {
+  .container {
+    width: min(100% - 1.5rem, var(--container-lg));
+  }
+}
+
 @media (min-width: 1100px) {
   .container {
     width: min(100% - 8rem, var(--container-lg));

@@ -1,0 +1,154 @@
+.shell {
+  --dash-bg: #07101f;
+  --dash-sidebar: linear-gradient(165deg, rgb(11 29 54 / 0.98), rgb(4 12 27 / 0.98));
+  --dash-text: #eef5ff;
+  --dash-muted: rgb(238 245 255 / 0.58);
+  --dash-subtle: rgb(238 245 255 / 0.44);
+  --dash-border: rgb(255 255 255 / 0.1);
+  --dash-panel: rgb(255 255 255 / 0.055);
+  --dash-panel-strong: linear-gradient(150deg, rgb(255 255 255 / 0.105), rgb(255 255 255 / 0.045));
+  --dash-input: rgb(4 12 27 / 0.62);
+  --dash-highlight: rgb(255 255 255 / 0.07);
+  --dash-hero: linear-gradient(135deg, rgb(19 50 83 / 0.82), rgb(43 20 74 / 0.74));
+  --dash-accent: #68f5ff;
+  --dash-accent-strong: #00ddeb;
+  --dash-violet: #a9a8ff;
+  --dash-warning: #ffc878;
+  --dash-success: #63e5a5;
+  --dash-danger: #ff8094;
+  --dash-notice-bg: rgb(255 193 84 / 0.07);
+  --dash-notice-border: rgb(255 193 84 / 0.2);
+  --dash-sidebar-shadow: 1.5rem 0 4rem rgb(0 0 0 / 0.18);
+  --dash-elevated-shadow: 0 1.5rem 4rem rgb(0 0 0 / 0.2);
+  --dash-card-hover-shadow: 0 1rem 2.5rem rgb(0 0 0 / 0.18), 0 0 2rem rgb(130 29 218 / 0.08);
+  --dash-button-surface: rgb(255 255 255 / 0.07);
+  --dash-button-border: rgb(255 255 255 / 0.13);
+  --dash-primary-hover-bg: transparent;
+  color-scheme: dark;
+  min-height: 100svh;
+  background: var(--dash-bg);
+  color: var(--dash-text);
+}
+
+.shell[data-theme="light"] {
+  --dash-bg: #f3f5fa;
+  --dash-sidebar: linear-gradient(165deg, rgb(255 255 255 / 0.98), rgb(239 243 250 / 0.98));
+  --dash-text: #111827;
+  --dash-muted: #5d6879;
+  --dash-subtle: #758094;
+  --dash-border: rgb(18 34 58 / 0.12);
+  --dash-panel: rgb(255 255 255 / 0.78);
+  --dash-panel-strong: linear-gradient(150deg, rgb(255 255 255 / 0.98), rgb(245 247 252 / 0.9));
+  --dash-input: rgb(255 255 255 / 0.9);
+  --dash-highlight: rgb(255 255 255 / 0.9);
+  --dash-hero: linear-gradient(135deg, rgb(225 248 250 / 0.96), rgb(241 230 251 / 0.95));
+  --dash-accent: #087d89;
+  --dash-accent-strong: #006d78;
+  --dash-violet: #6941b8;
+  --dash-warning: #985700;
+  --dash-success: #08794f;
+  --dash-danger: #bd2945;
+  --dash-notice-bg: rgb(179 103 0 / 0.08);
+  --dash-notice-border: rgb(179 103 0 / 0.2);
+  --dash-sidebar-shadow: 0.45rem 0 1.4rem rgb(18 34 58 / 0.055);
+  --dash-elevated-shadow: 0 0.8rem 2.2rem rgb(18 34 58 / 0.075);
+  --dash-card-hover-shadow: 0 0.75rem 1.8rem rgb(18 34 58 / 0.09), 0 0 1.2rem rgb(130 29 218 / 0.035);
+  --dash-button-surface: #e8edf4;
+  --dash-button-border: rgb(18 34 58 / 0.2);
+  --dash-primary-hover-bg: #edf3f5;
+  color-scheme: light;
+}
+
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 10;
+  display: flex;
+  width: 16.5rem;
+  flex-direction: column;
+  border-right: 1px solid var(--dash-border);
+  padding: 1.25rem;
+  background: var(--dash-sidebar);
+  box-shadow: var(--dash-sidebar-shadow);
+  transition: width 220ms ease, padding 220ms ease;
+}
+
+.collapseButton { position: absolute; top: 50%; right: -1rem; z-index: 2; display: grid; width: 2rem; height: 2rem; place-items: center; border: 1px solid var(--dash-button-border); border-radius: 50%; background: var(--dash-button-surface); color: var(--dash-text); box-shadow: 0 0.35rem 1rem rgb(0 0 0 / 0.1); transform: translateY(-50%); transition: color 180ms ease, border-color 180ms ease, transform 180ms ease; }
+.collapseButton:hover { border-color: rgb(0 164 178 / 0.45); color: var(--dash-accent-strong); transform: translateY(-50%) scale(1.05); }
+.brand { display: flex; min-height: 3.25rem; align-items: center; margin-bottom: 1.5rem; padding: 0.35rem; }
+.brand img { width: 10.5rem; height: 2.55rem; object-fit: cover; border-radius: 0.3rem; }
+.brandMark { display: none; width: 2.6rem; height: 2.6rem; place-items: center; border: 1px solid rgb(0 164 178 / 0.24); border-radius: 0.65rem; background: linear-gradient(145deg, rgb(0 242 255 / 0.14), rgb(130 29 218 / 0.14)); color: var(--dash-accent-strong); }
+
+.sidebar nav { display: grid; gap: 0.35rem; }
+.sidebar nav a { display: flex; min-height: 2.9rem; align-items: center; gap: 0.8rem; border: 1px solid transparent; border-radius: 0.65rem; padding: 0.7rem 0.8rem; color: var(--dash-muted); font-size: 0.9rem; font-weight: 720; transition: 180ms ease; }
+.sidebar nav a:hover { border-color: rgb(0 242 255 / 0.2); background: var(--dash-panel); color: var(--dash-text); transform: translateX(0.2rem); }
+
+.account { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; margin-top: auto; border-top: 1px solid var(--dash-border); padding-top: 1rem; }
+.account div { min-width: 0; }
+.account span, .account small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.account span { font-size: 0.86rem; font-weight: 800; }
+.account small { margin-top: 0.16rem; color: var(--dash-subtle); font-family: var(--font-mono); font-size: 0.65rem; }
+.account button { display: grid; width: 2.4rem; height: 2.4rem; place-items: center; border: 1px solid var(--dash-button-border); border-radius: 50%; background: var(--dash-button-surface); color: var(--dash-text); }
+
+.workspace { min-height: 100svh; margin-left: 16.5rem; background: radial-gradient(circle at 85% 4%, rgb(130 29 218 / 0.13), transparent 24rem), radial-gradient(circle at 15% 95%, rgb(0 242 255 / 0.08), transparent 28rem), var(--dash-bg); transition: margin-left 220ms ease; }
+.content { width: min(100% - 3rem, 82rem); margin-inline: auto; padding: 0.35rem 0 4rem; }
+.mobileHeader { position: sticky; top: 0; z-index: 25; display: flex; min-height: 4.25rem; align-items: center; justify-content: flex-end; padding: 0.65rem 1.5rem; background: linear-gradient(180deg, color-mix(in srgb, var(--dash-bg) 92%, transparent), transparent); backdrop-filter: blur(10px); }
+.mobileHeader > img, .mobileMenu { display: none; }
+.headerActions { display: flex; align-items: center; gap: 0.55rem; }
+
+.collapsed .sidebar { width: 5.25rem; padding-inline: 0.8rem; }
+.collapsed .workspace { margin-left: 5.25rem; }
+.collapsed .brand { justify-content: center; }
+.collapsed .brand img { display: none; }
+.collapsed .brandMark { display: grid; }
+.collapsed .sidebar nav a { justify-content: center; padding-inline: 0.65rem; }
+.collapsed .sidebar nav a span, .collapsed .account > div { display: none; }
+.collapsed .account { justify-content: center; }
+
+.dialogBackdrop { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 1rem; background: rgb(2 7 18 / 0.68); backdrop-filter: blur(12px); animation: dialogFade 160ms ease both; }
+.signOutDialog { position: relative; width: min(100%, 27rem); max-height: calc(100svh - 2rem); overflow-y: auto; border: 1px solid var(--dash-border); border-radius: 0.9rem; padding: 1.5rem; background: var(--dash-sidebar); color: var(--dash-text); box-shadow: inset 0 1px var(--dash-highlight), 0 2rem 6rem rgb(0 0 0 / 0.42); animation: dialogEnter 200ms ease both; }
+.signOutDialog::before { position: absolute; inset: 0 0 auto; height: 2px; border-radius: 0.9rem 0.9rem 0 0; content: ""; background: linear-gradient(90deg, #00f2ff, #821dda, #ff1e4d); }
+.dialogClose { position: absolute; top: 0.8rem; right: 0.8rem; display: grid; width: 2rem; height: 2rem; place-items: center; border: 1px solid var(--dash-button-border); border-radius: 50%; background: var(--dash-button-surface); color: var(--dash-muted); }
+.dialogClose:hover { border-color: rgb(0 242 255 / 0.35); color: var(--dash-text); }
+.dialogIcon { display: grid; width: 3rem; height: 3rem; place-items: center; border: 1px solid rgb(255 71 105 / 0.3); border-radius: 0.75rem; background: rgb(255 71 105 / 0.1); color: #ff607c; }
+.signOutDialog > p { margin: 1rem 0 0.3rem; color: #ff607c; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 850; text-transform: uppercase; }
+.signOutDialog h2 { margin: 0; font-size: 1.35rem; letter-spacing: 0; }
+.signOutDialog > span:not(.dialogIcon) { display: block; margin-top: 0.55rem; color: var(--dash-muted); font-size: 0.86rem; line-height: 1.55; }
+.dialogActions { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; margin-top: 1.35rem; }
+.dialogActions button { display: inline-flex; width: 100%; min-height: 2.8rem; align-items: center; justify-content: center; gap: 0.45rem; border: 1px solid var(--dash-button-border); border-radius: 0.6rem; background: var(--dash-button-surface); color: var(--dash-text); font-size: 0.8rem; font-weight: 850; transition: 180ms ease; }
+.dialogActions > button:hover { border-color: rgb(0 164 178 / 0.35); color: var(--dash-accent-strong); }
+.dialogActions form button { border-color: rgb(255 71 105 / 0.3); background: linear-gradient(135deg, #e51f55, #821dda); color: #fff; }
+.dialogActions form button:hover { border-color: #ff607c; box-shadow: 0 0.65rem 1.6rem rgb(130 29 218 / 0.22); transform: translateY(-1px); }
+@keyframes dialogFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes dialogEnter { from { opacity: 0; transform: translateY(0.6rem) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+@media (max-width: 860px) {
+  .sidebar { display: none; }
+  .workspace { margin-left: 0; }
+  .mobileHeader { z-index: 25; justify-content: space-between; border-bottom: 1px solid var(--dash-border); padding: 0.65rem 1rem; background: color-mix(in srgb, var(--dash-bg) 90%, transparent); backdrop-filter: blur(18px); }
+  .mobileHeader > img { display: block; width: 8.5rem; height: 2.1rem; object-fit: cover; border-radius: 0.25rem; }
+  .mobileMenu { position: relative; display: block; }
+  .mobileMenuButton { display: grid; width: 2.75rem; height: 2.75rem; cursor: pointer; place-items: center; border: 1px solid var(--dash-border); border-radius: 0.6rem; padding: 0; background: var(--dash-button-surface); color: var(--dash-text); }
+  .mobileMenuButton:hover { border-color: color-mix(in srgb, var(--dash-accent-strong) 45%, transparent); color: var(--dash-accent-strong); }
+  .mobileHeader nav { position: absolute; top: 3rem; right: 0; display: grid; width: min(15rem, calc(100vw - 1rem)); max-height: calc(100svh - 5rem); overflow-y: auto; overscroll-behavior: contain; border: 1px solid var(--dash-border); border-radius: 0.7rem; padding: 0.5rem; background: var(--dash-sidebar); box-shadow: 0 1rem 2rem rgb(0 0 0 / 0.25); }
+  .mobileHeader nav a { padding: 0.65rem; font-size: 0.86rem; }
+  .mobileSignOut { display: flex; align-items: center; gap: 0.45rem; border: 0; border-top: 1px solid var(--dash-border); padding: 0.65rem; background: transparent; color: #ff607c; font-size: 0.86rem; font-weight: 800; text-align: left; }
+  .content { width: min(100% - 1.5rem, 82rem); padding: 1.25rem 0 3rem; }
+}
+
+@media (max-width: 480px) {
+  .mobileHeader { padding-inline: 0.75rem; }
+  .mobileHeader > img { width: 7.75rem; height: 1.95rem; }
+  .content { width: min(100% - 1rem, 82rem); padding-bottom: 2.5rem; }
+  .signOutDialog { padding: 1.25rem; }
+  .dialogActions { grid-template-columns: 1fr; }
+}
+
+@media (max-height: 520px) and (orientation: landscape) {
+  .mobileHeader nav { grid-template-columns: repeat(2, minmax(0, 1fr)); width: min(25rem, calc(100vw - 1rem)); }
+  .mobileSignOut { border-top: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dialogBackdrop, .signOutDialog { animation: none; }
+}

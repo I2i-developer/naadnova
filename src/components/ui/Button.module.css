@@ -13,6 +13,9 @@
   font-weight: 750;
   line-height: 1.1;
   letter-spacing: 0;
+  max-width: 100%;
+  text-align: center;
+  white-space: normal;
   transition:
     transform var(--transition),
     background var(--transition),
@@ -100,4 +103,12 @@
 
 .link:hover {
   transform: none;
+}
+
+@media (max-width: 420px) {
+  .button {
+    min-height: 2.75rem;
+    padding: 0.74rem 1rem;
+    font-size: 0.78rem;
+  }
 }

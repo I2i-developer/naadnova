@@ -639,8 +639,10 @@
 
 @media (max-width: 780px) {
   .hero {
+    min-height: auto;
     align-items: start;
-    padding-block: 1.75rem;
+    padding-block: 2rem 2.6rem;
+    overflow-x: clip;
   }
 
   .hero h1 {
@@ -651,6 +653,12 @@
   .cardGrid,
   .stepGrid {
     grid-template-columns: 1fr;
+  }
+
+  .contactMethods,
+  .mapSection,
+  .booking {
+    overflow-x: clip;
   }
 
   .sectionHeader h2,
@@ -670,5 +678,92 @@
 
   .form button {
     width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .contactMethods,
+  .mapSection,
+  .booking {
+    padding-block: 2.75rem;
+  }
+
+  .sectionHeader {
+    text-align: left;
+  }
+
+  .heroBadges {
+    gap: 0.55rem;
+  }
+
+  .heroBadges span {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .formPanel,
+  .contactCard,
+  .locationCard,
+  .stepCard {
+    border-radius: 1rem;
+  }
+
+  .fieldGrid {
+    gap: 0.75rem;
+  }
+
+  .form label {
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+  }
+
+  .cardGrid {
+    gap: 0.9rem;
+    margin-top: var(--space-6);
+  }
+
+  .contactCard {
+    min-height: auto;
+    padding: 1rem;
+  }
+
+  .cardTop,
+  .locationCard {
+    grid-template-columns: 1fr;
+  }
+
+  .iconWrap {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .mapGrid,
+  .bookingGrid {
+    gap: 1.4rem;
+  }
+
+  .mapCopy > p:not(.eyebrow) {
+    font-size: 0.9rem;
+  }
+
+  .mapPanel {
+    min-height: 17rem;
+    border-radius: 1rem;
+  }
+
+  .heroActions a,
+  .locationCard a,
+  .bookingActions a {
+    width: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero h1 {
+    font-size: clamp(2.2rem, 11vw, 2.9rem);
+  }
+
+  .mapPanel {
+    min-height: 15rem;
   }
 }
