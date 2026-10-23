@@ -40,10 +40,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/logo.PNG",
-        width: 1717,
-        height: 916,
-        type: "image/png",
+        url: "/whatsapp-preview.jpg",
+        width: 1200,
+        height: 630,
+        type: "image/jpeg",
         alt: `${siteConfig.name} - Come, Learn & Create`
       }
     ]
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: [
       {
-        url: "/logo.PNG",
+        url: "/whatsapp-preview.jpg",
         alt: `${siteConfig.name} - Come, Learn & Create`
       }
     ]
