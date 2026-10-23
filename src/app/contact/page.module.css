@@ -232,6 +232,17 @@
   transform: rotate(45deg);
 }
 
+.form label small { color: #bd2945; font-size: 0.7rem; font-weight: 600; letter-spacing: 0; text-transform: none; }
+.form [aria-invalid="true"] { border-color: #bd2945; }
+.form .honeypot { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.formError { margin: 0; border: 1px solid rgb(189 41 69 / 0.2); border-radius: 0.5rem; padding: 0.65rem; background: rgb(189 41 69 / 0.06); color: #bd2945; font-size: 0.78rem; line-height: 1.45; }
+.formSuccess { position: relative; z-index: 1; display: grid; gap: 0.75rem; margin-top: 1.25rem; padding: 1rem 0; }
+.formSuccess > svg { color: #08794f; }
+.formSuccess h3 { margin: 0; font-size: 1.15rem; }
+.formSuccess p { margin: 0; color: var(--color-muted); font-size: 0.85rem; line-height: 1.5; }
+.formSuccess button { justify-self: start; }
+.form button:disabled { opacity: 0.65; cursor: wait; }
+
 .contactMethods,
 .mapSection,
 .booking {
@@ -402,6 +413,7 @@
 
 .contactCard strong {
   position: relative;
+  overflow-wrap: anywhere;
   z-index: 1;
   display: block;
   color: var(--color-foreground);

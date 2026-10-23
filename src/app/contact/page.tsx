@@ -1,21 +1,20 @@
 import {
   CalendarCheck,
-  Clock3,
   Headphones,
   Mail,
   MapPin,
   MessageCircle,
   Music2,
   Phone,
-  Send,
   Sparkles
 } from "lucide-react";
 
 import { Container } from "@/components/layout/Container";
+import { ContactForm } from "@/components/forms/ContactForm";
 import { MotionArticle } from "@/components/motion/MotionCard";
 import { Reveal } from "@/components/motion/Reveal";
 import { Button } from "@/components/ui/Button";
-import { featuredCourses, siteConfig } from "@/config/site";
+import { siteConfig } from "@/config/site";
 
 import styles from "./page.module.css";
 
@@ -23,6 +22,7 @@ const contactCards = [
   {
     label: "Call",
     value: siteConfig.contact.phone,
+    href: siteConfig.links.phone,
     helper: "Speak with the studio team",
     cue: "Best for quick guidance",
     Icon: Phone
@@ -30,6 +30,7 @@ const contactCards = [
   {
     label: "WhatsApp",
     value: siteConfig.contact.whatsapp,
+    href: siteConfig.links.whatsapp,
     helper: "Fastest for trial coordination",
     cue: "Fastest response path",
     Icon: MessageCircle
@@ -37,6 +38,7 @@ const contactCards = [
   {
     label: "Email",
     value: siteConfig.contact.email,
+    href: siteConfig.links.email,
     helper: "For course and schedule queries",
     cue: "Share detailed questions",
     Icon: Mail
@@ -44,6 +46,7 @@ const contactCards = [
   {
     label: "Studio",
     value: siteConfig.contact.location,
+    href: siteConfig.links.maps,
     helper: "Offline lessons and trial visits",
     cue: "Plan your visit",
     Icon: MapPin
@@ -91,10 +94,6 @@ export default function ContactPage() {
                 <Sparkles aria-hidden size={16} />
                 {siteConfig.tagline}
               </span>
-              <span>
-                <Clock3 aria-hidden size={16} />
-                {siteConfig.contact.hours}
-              </span>
             </div>
           </Reveal>
 
@@ -105,56 +104,7 @@ export default function ContactPage() {
               <p>Share a few details and we will guide you to the right starting point.</p>
             </div>
 
-            <form className={styles.form} action="/contact" aria-label="Trial class request">
-              <div className={styles.fieldGrid}>
-                <label>
-                  <span>Student name</span>
-                  <input name="name" placeholder="Student name" autoComplete="name" />
-                </label>
-
-                <label>
-                  <span>Phone number</span>
-                  <input name="phone" placeholder="Phone number" autoComplete="tel" />
-                </label>
-              </div>
-
-              <div className={styles.fieldGrid}>
-                <label>
-                  <span>Instrument</span>
-                  <select name="instrument" defaultValue="">
-                    <option value="" disabled>
-                      Choose instrument
-                    </option>
-                    {featuredCourses.map((course) => (
-                      <option key={course.slug} value={course.title}>
-                        {course.title}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-
-                <label>
-                  <span>Learning mode</span>
-                  <select name="mode" defaultValue="">
-                    <option value="" disabled>
-                      Choose mode
-                    </option>
-                    <option>Online</option>
-                    <option>Offline</option>
-                    <option>Hybrid</option>
-                  </select>
-                </label>
-              </div>
-
-              <label>
-                <span>What would you like to learn?</span>
-                <textarea name="message" placeholder="Tell us about your goals, age group, or preferred timing." />
-              </label>
-
-              <Button type="submit" variant="primary" icon={<Send aria-hidden size={17} />}>
-                Send Trial Request
-              </Button>
-            </form>
+            <ContactForm />
           </Reveal>
         </Container>
       </section>
@@ -169,7 +119,7 @@ export default function ContactPage() {
           </Reveal>
 
           <div className={styles.cardGrid}>
-            {contactCards.map(({ label, value, helper, cue, Icon }, index) => (
+            {contactCards.map(({ label, value, href, helper, cue, Icon }, index) => (
               <MotionArticle key={label} className={styles.contactCard} delay={index * 0.06}>
                 <div className={styles.cardTop}>
                   <span className={styles.iconWrap}>
@@ -179,7 +129,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className={styles.cardBody}>
-                  <strong>{value}</strong>
+                  <strong><a href={href}>{value}</a></strong>
                   <p>{helper}</p>
                 </div>
 
@@ -211,20 +161,19 @@ export default function ContactPage() {
               Find your way to the <span>NaadNova studio.</span>
             </h2>
             <p>
-              Visit for offline lessons, trial classes, and in-person guidance. Update the studio
-              address in the site settings when the final location is confirmed.
+              Visit our studio in Andrew&apos;s Ganj, South Extension, Delhi for offline lessons,
+              trial classes, and in-person guidance. Contact us to arrange your visit.
             </p>
 
             <div className={styles.locationCard}>
               <MapPin aria-hidden size={22} />
               <div>
                 <strong>{siteConfig.contact.location}</strong>
-                <span>{siteConfig.contact.hours}</span>
               </div>
             </div>
 
             <Button
-              href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`}
+              href={siteConfig.links.maps}
               variant="primary"
               target="_blank"
               rel="noreferrer"

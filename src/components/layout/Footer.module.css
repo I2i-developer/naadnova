@@ -32,6 +32,7 @@
 .brand p,
 .footer p {
   max-width: 22rem;
+  overflow-wrap: anywhere;
   margin: var(--space-4) 0;
   color: var(--color-muted);
 }

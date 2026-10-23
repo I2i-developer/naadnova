@@ -69,12 +69,11 @@ export function Footer() {
 
         <div>
           <h2>Contact</h2>
-          <p>{siteConfig.contact.phone}</p>
-          <p>{siteConfig.contact.email}</p>
-          <p>{siteConfig.contact.location}</p>
-          <p>{siteConfig.contact.hours}</p>
+          <p><a href={siteConfig.links.phone}>{siteConfig.contact.phone}</a></p>
+          <p><a href={siteConfig.links.email}>{siteConfig.contact.email}</a></p>
+          <p><a href={siteConfig.links.maps} target="_blank" rel="noreferrer">{siteConfig.contact.location}</a></p>
           <p>
-            <Link href={siteConfig.links.googleBusinessProfile}>Google Business Profile</Link>
+            <a href={siteConfig.links.maps} target="_blank" rel="noreferrer">Find the studio on Google Maps</a>
           </p>
         </div>
 

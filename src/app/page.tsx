@@ -134,6 +134,7 @@ export default function HomePage() {
     description: siteConfig.description,
     url: siteConfig.url,
     telephone: siteConfig.contact.phone,
+    email: siteConfig.contact.email,
     address: siteConfig.contact.location
   };
 

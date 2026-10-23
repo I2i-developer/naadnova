@@ -20,6 +20,11 @@ import {
 
 import { env } from "@/lib/env";
 
+const academyAddress = "Andrew's Ganj, Hudco Place, Transit Flats 15 B, South Extension, Delhi 110049";
+const academyPhone = "9211732518";
+const academyEmail = "naadnovaofficial@gmail.com";
+const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(academyAddress)}`;
+
 export const siteConfig = {
   name: "Naadnova Academy",
   tagline: "come learn & Create.",
@@ -30,11 +35,10 @@ export const siteConfig = {
   primaryCta: "Book a Free Trial Class",
   secondaryCta: "Explore Programs",
   contact: {
-    phone: "[Phone Number]",
-    email: "[Email Address]",
-    whatsapp: "[WhatsApp Number]",
-    location: "[Studio Location]",
-    hours: "[Teaching Hours]"
+    phone: academyPhone,
+    email: academyEmail,
+    whatsapp: `+91 ${academyPhone}`,
+    location: academyAddress
   },
   social: {
     instagram: "#",
@@ -43,7 +47,10 @@ export const siteConfig = {
   },
   links: {
     googleForm: "#",
-    whatsapp: "#",
+    whatsapp: `https://wa.me/91${academyPhone}`,
+    phone: `tel:+91${academyPhone}`,
+    email: `mailto:${academyEmail}`,
+    maps: mapsUrl,
     googleBusinessProfile: "#"
   }
 } as const;
@@ -203,7 +210,7 @@ export const faqs = [
   },
   {
     question: "Where is the studio located?",
-    answer: "The location is currently a placeholder: [Studio Location]. Local SEO content should be updated once the exact area is supplied."
+    answer: `Our studio is located at ${siteConfig.contact.location}. Contact us to arrange a trial class or studio visit.`
   }
 ];
 

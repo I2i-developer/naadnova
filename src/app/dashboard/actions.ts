@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-import { env } from "@/lib/env";
+import { siteConfig } from "@/config/site";
 import { requireUser } from "@/lib/auth";
 
 function field(formData: FormData, key: string) {
@@ -54,7 +54,7 @@ export async function enrollInCourse(formData: FormData) {
   }
 
   const message = `Hello Naadnova Academy, I want to complete payment for ${course.title}. My Student ID is ${profile?.student_code ?? user.id}. My course reference is ${enrollment.enrollment_code}. My name is ${studentName} and phone number is ${phone}. Please share payment details.`;
-  const number = (env.whatsappNumber ?? "").replace(/\D/g, "");
+  const number = siteConfig.contact.whatsapp.replace(/\D/g, "");
   revalidatePath("/dashboard");
   if (number) redirect(`https://wa.me/${number}?text=${encodeURIComponent(message)}`);
   redirect("/dashboard?message=registered");
